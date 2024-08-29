@@ -16,6 +16,7 @@ public class HomePage {
     By ServicesList = By.xpath("//div[@class='grid-item-inner wow fadeInUp']/div[2]/h3");
 
     public void selectServices() throws InterruptedException {
+        Thread.sleep(5000);
         driver.findElement(servicesLink).click();
         Thread.sleep(5000);
     }
