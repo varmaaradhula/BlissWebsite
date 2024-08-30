@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.Browser;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.annotations.Parameters;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,22 +17,30 @@ import java.util.Properties;
 
 public class BaseTest {
     public WebDriver driver;
+   // @Parameters("browser")
     public WebDriver webDriverManager() throws IOException {
+        String browser = System.getProperty("browser");
         Properties properties = new Properties();
         FileInputStream fis = new FileInputStream(System.getProperty("user.dir")+"/src/test/Resources/global.properties");
         properties.load(fis);
-
         if(driver==null) {
             DesiredCapabilities caps = new DesiredCapabilities();
-            if (properties.getProperty("browser").equals("chrome")) {
+           // if (properties.getProperty("browser").equals("chrome"))
+            if (browser.equals("chrome"))
+            {
                 //driver = new ChromeDriver();
                 caps.setBrowserName("chrome");
                 driver = new RemoteWebDriver(new URL("http://localhost:4444"),caps);
-            } else if (properties.getProperty("browser").equals("firefox")) {
+            } //
+            //else if (properties.getProperty("browser").equals("firefox"))
+            else if (browser.equals("firefox"))
+            {
                 caps.setBrowserName("firefox");
                 driver = new RemoteWebDriver(new URL("http://localhost:4444"),caps);
                 //driver = new FirefoxDriver();
-            } else if (properties.getProperty("browser").equals("edge")) {
+            } //else if (properties.getProperty("browser").equals("edge"))
+            else if (browser.equals("edge"))
+            {
                 //driver = new EdgeDriver();
                 caps.setBrowserName("EDGE");
                 driver = new RemoteWebDriver(new URL("http://localhost:4444"),caps);
